@@ -1,0 +1,25 @@
+cd 
+ls #webapp-color
+cat Dockerfile
+ 
+#Now to create and work on image.
+docker build -t webapp-color .        #Builds webapp-color image
+docker run -p 8282:8080 webapp-color  #Runs an instance of it 
+docker run python:3.6 cat /etc/*release* #Shows info about the image (We want OS)
+
+#Now the current image is huge, so we create a lighter one by replacing python with python3.6-alpine
+cd
+ls
+vi Dockerfile
+#Replace pyhton3.6 with python3.6-alpine
+:wq
+#Now we make a new image
+docker build -t webapp-color:lite .
+docker images #Check the image and size
+docker run -p 8383:8080 webapp-color:lite 
+
+#Changing Env Variables:
+docker inspect <name of container/image>
+docker run -p 38282:8080 --name blue-app -e APP_COLOR+blue -d kodekloud/simple-webapp #This makes a new image with given color and name
+docker run --name mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 -d mysql #This makes an image with given host and a password
+
