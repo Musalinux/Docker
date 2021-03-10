@@ -8,3 +8,9 @@ docker stop
 dokcer rmi -f ubuntu #forcefully removes image
 docker labs <name>
 docker run -p 38282:8080 kodekloud/simple-webapp:blue # This runs the image simple web-app through port 38382 and with the tag- blue
+
+docker inspect network 
+docker network ls
+docker run --name alpine-2 --network=none alpine #This assigns the network a type: "None"
+docker run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db --network wp-mysql-network mysql:5.6 #Makes mysql instance which is linked to wp-mysql-network
+docker run -d --name webapp -p 38080:8080 --network wp-mysql-network -e DB_Host=mysql-db -e DB_Password=db_pass123 kodekloud/simple-webapp-mysql #Makes a webapp
